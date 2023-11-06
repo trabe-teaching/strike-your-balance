@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Strike your Balance</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark-reasonable.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <style>
+    @font-face {
+      font-family: 'ASM-Regular';
+      src: url('fonts/31A5DC_3_0.eot') format('opentype'),
+           url('fonts/31A5DC_3_0.woff') format('woff'),
+           url('fonts/31A5DC_3_0.ttf') format('truetype');
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-size: 5vh;
+      line-height: 6vh;
+      font-family: "ASM-Regular", sans-serif;
+    }
+
+    a {
+      color: #3333ff;
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: #ff33cc;
+    }
+
+    /*
+    code {
+      font-family: monospace;
+      background-color: #f0f0f0;
+      padding: 0.5vh;
+      font-size: 80%;
+    }
+ */
+    small {
+      font-size: 60%;
+    }
+
+    .container {
+      scroll-snap-type: y mandatory;
+      height: 100vh;
+      width: 100vw;
+      overflow-x: hidden;
+    }
+
+    section {
+      scroll-snap-align: start;
+      height: 100vh;
+      width: 100vw;
+      padding: 10vh 5vw;
+      display: flex;
+      flex-flow: column;
+      justify-content: start;
+      align-items: start;
+      text-align: center;
+    }
+
+    section.cover--first,
+    section.meme,
+    section.blue,
+    section.black {
+      justify-content: center;
+      align-items: center;
+    }
+
+    section.blue {
+      color: #fff;
+      background-color: #3333ff;
+    }
+
+    section.blue a {
+      color: #fff;
+    }
+
+    section.blue a:hover {
+      color: #ff33cc;
+    }
+
+    section.black {
+      color: #fff;
+      background-color: #000;
+    }
+
+    section.cover {
+     flex-flow: row;
+     align-items: center
+    }
+
+    section.cover > * {
+      width: 35vw;
+    }
+
+    section.cover > * + * {
+      margin-left: 10vw;
+    }
+
+    section.cover > div {
+      display: flex;
+      flex-flow: column;
+    }
+
+    section.source {
+      background-color: #282c34;
+    }
+
+    section.source pre {
+      text-align: left;
+      font-size: 80%;
+    }
+
+    img {
+      display: block;
+    }
+
+    h1 {
+      font-size: 9vh;
+      line-height: 10vh;
+    }
+
+    h2 {
+      font-size: 7vh;
+      line-height: 8vh;
+    }
+
+    h1 + h2 {
+      margin-top: 8vh;
+    }
+
+    h2 + ul {
+      margin-top: 6vh;
+    }
+
+    ul {
+      text-align: left;
+    }
+
+    ul > li + li {
+      margin-top: 3vh;
+    }
+
+    ul ul {
+      margin-top: 3vh;
+      font-size: 70%;
+      line-height: 100%;
+    }
+
+    ul ul > li + li {
+      margin-top: 3vh;
+    }
+
+    blockquote {
+      text-align: left;
+      margin: 4vh 4vw;
+      padding-left: 4vw;
+    }
+
+    blockquote em {
+      font-style: normal;
+      background-color: coral;
+    }
+
+    #pagination {
+      position: fixed;
+      top: 2vh;
+      right: 2vw;
+      color: #444;
+      background-color: white;
+      font-size: 1vh;
+      line-height: 1vh;
+      padding: 0.5vh 0.25vw 0.2vh;
+    }
+  </style>
+</head>
+<body>
+  <div id="pagination"></div>
+  <div class="container">
+    <section class="cover--first" style="position: relative">
+      <h1>Trabe</h1>
+      <img src="assets/trabe-logo.png" alt="Trabe logo" style="height: 40vh; margin: 6vh 0"/>
+      <h2>Asís & David</h2>
+
+      <div style="position:absolute; bottom: 1vh; right: 1vw; padding: 1vh 1vw; background-color: #f0f0ea; font-size: 2vh; line-height: 2vh">
+        https://trabe-teaching.github.io/strike-your-balance
+      </div>
+    </section>
+
+    <section>
+      <h2>Context</h2>
+      <ul>
+        <li>We are "old" 👨🏻‍🦳👴🏻</li>
+        <li>We develop front and back with JS (15+ years)</li>
+
+        <li>We have developed with many other stacks: RoR, JEE, .NET...</li>
+        <li>We journied from metamagic to explicitnes</li>
+        <li>We long for the right abstractions</li>
+      </ul>
+    </section>
+
+
+    <section class="blue">
+      <h1>Strike your balance</h1>
+      <h4>...or the search for the right abstraction</h4>
+    </section>
+
+    <section>
+      <h1>About abstractions...</h1>
+
+      <blockquote>
+        Abstraction in computer science is the process of removing elements of a code or program that aren't relevant or that distract from more important elements. <em>Abstraction refers to looking at something to maintain the general form or meaning while reducing the presence of specific details</em>.
+      </blockquote>
+    </section>
+
+    <section class="source">
+      <pre><code class="language-ruby">
+text = File.open("some.txt").read
+      </code></pre>
+    </section>
+
+    <section class="source">
+      <pre><code class="language-js">
+const buffer = await fs.readFile("some.txt");
+const text = buffer.toString();
+      </code></pre>
+    </section>
+
+    <section class="source">
+      <pre><code class="language-c">
+int file = open("example.txt", O_RDONLY);
+
+struct stat file_info;
+fstat(file, &file_info);
+
+char *buffer = (char *)malloc(file_info.st_size + 1);
+
+read(file, buffer, file_info.st_size);
+buffer[file_info.st_size] = '\0';
+
+close(file);
+      </code></pre>
+    </section>
+
+
+    <section class="cover">
+      <h2>Summing up</h2>
+    </section>
+
+    <section class="blue">
+      <h1>Strike your balance</h1>
+    </section>
+
+    <section class="black">
+      <h1>Questions?</h1>
+    </section>
+
+    <section class="blue">
+      <h1>Shameless plug: We are always hiring</h1>
+      <h2><a href="mailto:rrhh@trabe.io">rrhh@trabe.io</a></h2>
+    </section>
+  </div>
+
+  <script>
+    const observeSectionIntersection = section => {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            location.assign(`#${section.id}`);
+          }
+        })
+      }, {
+        root: document.querySelector(".container"),
+        threshold: 0.5,
+      });
+
+      observer.observe(section);
+    }
+
+    document.querySelectorAll("section").forEach((section, index) => {
+      section.id = `slide-${index}`;
+
+      observeSectionIntersection(section);
+    });
+
+    const updatePagination = () => {
+      const totalPages = document.querySelectorAll("section").length;
+      const currentPage = Number(location.hash.replace("#slide-","")) + 1;
+
+      document.getElementById("pagination").innerHTML = `${currentPage}/${totalPages}`;
+    }
+
+    updatePagination();
+    window.addEventListener("hashchange", updatePagination);
+  </script>
+
+  <script>hljs.highlightAll();</script>
+</body>
+</html>
