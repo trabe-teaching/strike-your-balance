@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <title>Strike your Balance</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark-reasonable.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <link href="https://unpkg.com/prismjs@1.29.0/themes/prism-tomorrow.css" rel="stylesheet" />
+
   <style>
     @font-face {
       font-family: 'ASM-Regular';
@@ -35,14 +35,6 @@
       color: #ff33cc;
     }
 
-    /*
-    code {
-      font-family: monospace;
-      background-color: #f0f0f0;
-      padding: 0.5vh;
-      font-size: 80%;
-    }
- */
     small {
       font-size: 60%;
     }
@@ -66,12 +58,19 @@
       text-align: center;
     }
 
+    section.center,
     section.cover--first,
+    section.disclaimer,
     section.meme,
     section.blue,
     section.black {
       justify-content: center;
       align-items: center;
+    }
+
+    section.disclaimer {
+      color: #fff;
+      background-color: #ff3333;
     }
 
     section.blue {
@@ -111,12 +110,33 @@
     }
 
     section.source {
-      background-color: #282c34;
+      background-color: #2d2d2d;
     }
 
     section.source pre {
       text-align: left;
-      font-size: 80%;
+      padding: 0 !important;
+      margin: 0 !important;
+      margin-top: -1em !important;
+      line-height: 1 !important;
+      font-size: 80% !important;
+    }
+
+    section.source pre code {
+      font-size: 70% !important;
+    }
+
+    section.quote blockquote {
+      margin-left: 0;
+      text-align: left;
+      margin: 4vh 0;
+    }
+
+    section.quote em {
+      padding: 4px;
+      background-color: rgb(251, 234, 116);
+      font-style: normal;
+
     }
 
     img {
@@ -133,7 +153,8 @@
       line-height: 8vh;
     }
 
-    h1 + h2 {
+    h1 + h2,
+    h3 + h1 {
       margin-top: 8vh;
     }
 
@@ -157,17 +178,6 @@
 
     ul ul > li + li {
       margin-top: 3vh;
-    }
-
-    blockquote {
-      text-align: left;
-      margin: 4vh 4vw;
-      padding-left: 4vw;
-    }
-
-    blockquote em {
-      font-style: normal;
-      background-color: coral;
     }
 
     #pagination {
@@ -198,27 +208,48 @@
     <section>
       <h2>Context</h2>
       <ul>
-        <li>We are "old" 👨🏻‍🦳👴🏻</li>
+        <li>We are "old" and tired 👨🏻‍🦳👴🏻</li>
         <li>We develop front and back with JS (15+ years)</li>
-
         <li>We have developed with many other stacks: RoR, JEE, .NET...</li>
-        <li>We journied from metamagic to explicitnes</li>
+        <li>We journied from metamagic to explicitness</li>
         <li>We long for the right abstractions</li>
       </ul>
     </section>
 
+    <section>
+      <h2>Motivation</h2>
+      <ul>
+        <li>IDHO (In David's humble opinion)</li>
+        <li>Rookie developers struggle with abstractions</li>
+        <li>...so, back to the basics</li>
+      </ul>
+    </section>
 
     <section class="blue">
       <h1>Strike your balance</h1>
       <h4>...or the search for the right abstraction</h4>
     </section>
 
-    <section>
+    <section class="disclaimer">
+      <h1>About the code examples</h1>
+      <h3>Javascript, mostly naive, can be unsafe, no imports/exports</h3>
+    </section>
+
+    <section class="quote">
       <h1>About abstractions...</h1>
 
       <blockquote>
         Abstraction in computer science is the process of removing elements of a code or program that aren't relevant or that distract from more important elements. <em>Abstraction refers to looking at something to maintain the general form or meaning while reducing the presence of specific details</em>.
       </blockquote>
+    </section>
+
+    <section class="center">
+      <h1>Could have been extraction instead</h1>
+    </section>
+
+    <section class="center"> 
+      <h1>Example</h1>
+      <h2>Let's read a file into a string using three languages with three levels of abstraction</h2>
     </section>
 
     <section class="source">
@@ -250,13 +281,318 @@ close(file);
       </code></pre>
     </section>
 
+    <section>
+      <h2>Every option has pros and cons</h2>
+      <ul>
+        <li>High level: easy to use, easy to understand</li>
+        <li>Low level: highly customizable, fares better with unexpected uses</li>
+      </ul>
+    </section>
 
-    <section class="cover">
+    <section class="black">
+      <h1>Every abstraction has tradeoffs<h1>
+      <h2>This talk's mantra</h2>
+    </section>
+
+    <section class="center">
+      <h1>Real world example<h1>
+      <h2>Dependency injection</h2>
+    </section>
+
+    <section class="center">
+      <h1>Option 1</h1>
+      <h2>Explicit dependencies</h2>
+    </section>
+
+    <section class="source">
+      <pre><code class="language-js">
+function updateUserPreference({ key, value, repos }) {
+  // Do stuff and get an updated user
+  repos.userRepo.update(updatedUser);
+}
+      </code></pre>
+    </section>
+
+    <section class="source">
+      <pre><code class="language-js">
+const repos = {
+  userRepo: userRepo(),
+};
+
+updateUserPreference({ key: "someKey", value: "someValue", repos });
+      </code></pre>
+    </section>
+
+    <section class="source">
+      <pre><code class="language-js">
+it("updates the user preference", () => {
+  const mockUpdate = jest.fn();
+  const mockRepo = { update: mockUpdate };
+  const repos = { userRepo: mockRepo };
+
+  updateUserPreference({ key: "someKey", value: "someValue", repos });
+
+  expect(mockUpdate).toHaveBeenCalledWith(/* the updatedUser */);
+});
+      </code></pre>
+    </section>
+
+    <section class="center">
+      <h1>Option 2</h1>
+      <h2>Implicit dependencies</h2>
+    </section>
+
+    <section class="source">
+      <pre><code class="language-js">
+function updateUserPreference({ key, value }) {
+  const repo = userRepo();    
+  // Do stuff and get an updated user
+  repo.update(updatedUser);
+}
+      </code></pre>
+    </section>
+
+    <section class="source">
+      <pre><code class="language-js">
+updateUserPreference({ key: "someKey", value: "someValue" });
+      </code></pre>
+    </section>
+
+    <section class="source">
+      <pre><code class="language-js">
+const mockUpdate = jest.fn();
+
+jest.mock("user-repo.js", () => () => ({
+  update: mockUpdate;
+}));
+
+it("updates the user preference", () => {
+  updateUserPreference({ key: "someKey", value: "someValue" });
+  expect(mockUpdate).toHaveBeenCalledWith(/* the updatedUser */);
+});
+      </code></pre>
+    </section>
+
+    <section class="center">
+      <h1>Option 3</h1>
+      <h2>Both</h2>
+    </section>
+
+    <section class="source">
+      <pre><code class="language-js">
+function defaultRepos() {
+  return {
+    userRepo: userRepo(),
+  };
+};
+
+function updateUserPreference({ key, value, repos = defaultRepos() }) {
+  // Do stuff and get an updated user
+  repos.userRepo.update(updatedUser);
+}
+      </code></pre>
+    </section>
+
+    <section class="source">
+      <pre><code class="language-js">
+updateUserPreference({ key: "someKey", value: "someValue" });
+      </code></pre>
+    </section>
+
+    <section class="source">
+      <pre><code class="language-js">
+it("updates the user preference", () => {
+  const mockUpdate = jest.fn();
+  const mockRepo = { update: mockUpdate };
+  const repos = { userRepo: mockRepo };
+
+  updateUserPreference({ key: "someKey", value: "someValue", repos });
+
+  expect(mockUpdate).toHaveBeenCalledWith(/* the updatedUser */);
+});
+      </code></pre>
+    </section>
+
+    <section>
+      <h2>You can't have everything!</h2>
+      <ul>
+        <li>Explicit: no magic, esay to grasp, easy to test</li>
+        <li>Implicit: convenience, less boilerplate</li>
+        <li>Both: convenience, easy to test</li>
+      </ul>
+    </section>
+
+    <section class="black">
+      <h1>Every abstraction has tradeoffs<h1>
+    </section>
+
+    <section class="center">
+      <h1>Real world example<h1>
+      <h2>A very common React abstraction</h2>
+    </section>
+
+    <section class="source">
+      <pre><code class="language-jsx">
+const StorageContext = React.createContext();
+
+function StorageProvider({ storage, children }) {
+  return (
+    &lt;StorageContext.Provider value={storage}&gt;
+      {children}
+    &lt;/StorageContext&gt;
+  );
+}
+      </code></pre>
+    </section>
+
+    <section class="source">
+      <pre><code class="language-jsx">
+function useStorage() {
+  const storage = React.useContext(StorageContext);
+
+  if (!storage) {
+    throw new Error("Cannot use useStorage outside of an StorageProvider");
+  }
+
+  return storage;
+}
+      </code></pre>
+    </section>
+
+    <section class="source">
+      <pre><code class="language-jsx">
+function useStoredState(key, initialValue) {
+  const storage = useStorage();
+
+  const [value, setValue] = React.useState(() =&gt; {
+    return storage.get(key) ?? initialValue;
+  });
+
+  const setStoredValue = (newValue) =&gt; {
+    setValue(newValue);
+    storage.set(key, newValue);
+  };
+
+  return [ value, setStoredValue ];
+}
+      </code></pre>
+    </section>
+
+    <section class="source">
+      <pre><code class="language-jsx">
+function Counter() {
+  const [count, setCount] = useStoredState(0);
+  return &lt;button onClick={() => setCount(count + 1)}&gt;{count}&lt;/button&gt;
+}
+
+
+&lt;StorageProvider storage={window.localStorage}&gt;
+  &lt;MyComponent /&gt;
+&lt;/StorageProvider&gt;
+
+      </code></pre>
+    </section>
+
+    <section class="source">
+      <pre><code class="language-jsx">
+test("It works", () => {
+  render(
+    &lt;StorageProvider storage={new Map()}&gt;
+      &lt;MyComponent /&gt;
+    &lt;/StorageProvider&gt;
+  );
+});
+      </code></pre>
+    </section>
+
+    <section class="source">
+      <pre><code class="language-jsx">
+test("Does not work", () => {
+  render(&lt;MyComponent/&gt;);
+});
+      </code></pre>
+    </section>
+
+    <section class="center">
+      <h1>And now, what?<h1>
+    </section>
+
+    <section class="source">
+      <pre><code class="language-jsx">
+function useStorage() {
+  const storage = React.useContext(StorageContext);
+
+  if (!storage) {
+    console.error("Cannot use useStorage outside of an StorageProvider");
+  }
+
+  return storage;
+}
+      </code></pre>
+    </section>
+
+    <section class="source">
+      <pre><code class="language-jsx">
+      ...TODO
+      </code></pre>
+    </section>
+
+    <section>
+      <h2>You can't have everything!</h2>
+      <ul>
+        <li>TODO</li>
+      </ul>
+    </section>
+
+    <section class="black">
+      <h1>Every abstraction has tradeoffs<h1>
+    </section>
+
+    <section class="center">
+      <h1>Real world examples<h1>
+      <h2>To couple or not to couple</h2>
+    </section>
+
+    <section class="source">
+      <pre><code class="language-jsx">
+      ...TODO
+      </code></pre>
+    </section>
+
+    <section>
+      <h2>You can't have everything!</h2>
+      <ul>
+        <li>TODO</li>
+      </ul>
+    </section>
+
+    <section class="black">
+      <h1>Every abstraction has tradeoffs<h1>
+    </section>
+
+    <section class="center">
       <h2>Summing up</h2>
+    </section>
+
+    <section>
+      <h2>You can't have everything!</h2>
+      <ul>
+        <li>TODO</li>
+        <li>Red flags: `storage: "memory" vs `storage: memoryStorage` example 
+      </ul>
+    </section>
+
+    <section class="quote">
+      ...famous bad abstraction quote
+    </section>
+
+    <section class="black">
+      <h1>Every abstraction has tradeoffs<h1>
     </section>
 
     <section class="blue">
       <h1>Strike your balance</h1>
+      <h4>Use the right abstraction</h4>
     </section>
 
     <section class="black">
@@ -264,7 +600,8 @@ close(file);
     </section>
 
     <section class="blue">
-      <h1>Shameless plug: We are always hiring</h1>
+      <h3>Shameless plug</h3>
+      <h1>We are always hiring</h1>
       <h2><a href="mailto:rrhh@trabe.io">rrhh@trabe.io</a></h2>
     </section>
   </div>
@@ -301,7 +638,7 @@ close(file);
     updatePagination();
     window.addEventListener("hashchange", updatePagination);
   </script>
-
-  <script>hljs.highlightAll();</script>
+  <script src="https://unpkg.com/prismjs@1.29.0/components/prism-core.min.js"></script>
+	<script src="https://unpkg.com/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
 </body>
 </html>
