@@ -70,7 +70,7 @@
 
     section.disclaimer {
       color: #fff;
-      background-color: #ff3333;
+      background-color: rgb(157, 41, 41);
     }
 
     section.blue {
@@ -119,7 +119,7 @@
       margin: 0 !important;
       margin-top: -1em !important;
       line-height: 1 !important;
-      font-size: 80% !important;
+      font-size: 75% !important;
     }
 
     section.source pre code {
@@ -129,14 +129,27 @@
     section.quote blockquote {
       margin-left: 0;
       text-align: left;
+      font-size: 90%;
+      line-height: 1.3;
       margin: 4vh 0;
+    }
+
+    section.quote cite {
+      display: block;
+      font-style: normal;
+      font-size: 70%;
+      color: #666;
     }
 
     section.quote em {
       padding: 4px;
       background-color: rgb(251, 234, 116);
       font-style: normal;
+    }
 
+    code {
+      background-color: #ddd;
+      font-size: 90%;
     }
 
     img {
@@ -153,8 +166,14 @@
       line-height: 8vh;
     }
 
+    h3 {
+      font-size: 5vh;
+      line-height: 8vh;
+    }
+
     h1 + h2,
-    h3 + h1 {
+    h2 + h3,
+    h3 + h2 {
       margin-top: 8vh;
     }
 
@@ -227,12 +246,12 @@
 
     <section class="blue">
       <h1>Strike your balance</h1>
-      <h4>...or the search for the right abstraction</h4>
+      <h3>...or the search for the right abstraction</h3>
     </section>
 
     <section class="disclaimer">
-      <h1>About the code examples</h1>
-      <h3>Javascript, mostly naive, can be unsafe, no imports/exports</h3>
+      <h2>About the code examples</h2>
+      <h3>Javascript, mostly naive, can be unsafe,<br/>no imports/exports</h3>
     </section>
 
     <section class="quote">
@@ -244,22 +263,29 @@
     </section>
 
     <section class="center">
-      <h1>Could have been extraction instead</h1>
+      <h2>Could have been "extraction"</h2>
+    </section>
+
+    <section class="center">
+      <h2>An abstraction is defined<br/>by its APIs</h2>
+      <h3>How do I use it. What do I get</h3>
     </section>
 
     <section class="center"> 
-      <h1>Example</h1>
-      <h2>Let's read a file into a string using three languages with three levels of abstraction</h2>
+      <h2>Example</h2>
+      <h3>Read a file into a string<br/>three languages, three levels of abstraction</h3>
     </section>
 
     <section class="source">
       <pre><code class="language-ruby">
+# ruby
 text = File.open("some.txt").read
       </code></pre>
     </section>
 
     <section class="source">
       <pre><code class="language-js">
+// js - node
 const buffer = await fs.readFile("some.txt");
 const text = buffer.toString();
       </code></pre>
@@ -267,6 +293,7 @@ const text = buffer.toString();
 
     <section class="source">
       <pre><code class="language-c">
+// C
 int file = open("example.txt", O_RDONLY);
 
 struct stat file_info;
@@ -282,26 +309,26 @@ close(file);
     </section>
 
     <section>
-      <h2>Every option has pros and cons</h2>
+      <h2>You can't have everything!</h2>
       <ul>
+        <li>Every option has pros and cons</li>
         <li>High level: easy to use, easy to understand</li>
         <li>Low level: highly customizable, fares better with unexpected uses</li>
       </ul>
     </section>
 
     <section class="black">
-      <h1>Every abstraction has tradeoffs<h1>
-      <h2>This talk's mantra</h2>
+      <h2>Every abstraction has tradeoffs<h2>
+      <h3>This talk's mantra</h3>
     </section>
 
     <section class="center">
-      <h1>Real world example<h1>
-      <h2>Dependency injection</h2>
+      <h2>Real world example<h2>
+      <h3>Dependency injection</h3>
     </section>
 
     <section class="center">
-      <h1>Option 1</h1>
-      <h2>Explicit dependencies</h2>
+      <h2>Option 1: Explicit dependencies</h2>
     </section>
 
     <section class="source">
@@ -338,8 +365,7 @@ it("updates the user preference", () => {
     </section>
 
     <section class="center">
-      <h1>Option 2</h1>
-      <h2>Implicit dependencies</h2>
+      <h2>Option 2: Implicit dependencies</h2>
     </section>
 
     <section class="source">
@@ -374,8 +400,7 @@ it("updates the user preference", () => {
     </section>
 
     <section class="center">
-      <h1>Option 3</h1>
-      <h2>Both</h2>
+      <h2>Option 3: Both</h2>
     </section>
 
     <section class="source">
@@ -416,19 +441,19 @@ it("updates the user preference", () => {
     <section>
       <h2>You can't have everything!</h2>
       <ul>
-        <li>Explicit: no magic, esay to grasp, easy to test</li>
+        <li>Explicit: no magic, easy to grasp, easy to test</li>
         <li>Implicit: convenience, less boilerplate</li>
         <li>Both: convenience, easy to test</li>
       </ul>
     </section>
 
     <section class="black">
-      <h1>Every abstraction has tradeoffs<h1>
+      <h2>Every abstraction has tradeoffs<h2>
     </section>
 
     <section class="center">
-      <h1>Real world example<h1>
-      <h2>A very common React abstraction</h2>
+      <h2>Real world example<h2>
+      <h3>A very common React abstraction</h3>
     </section>
 
     <section class="source">
@@ -514,7 +539,7 @@ test("Does not work", () => {
     </section>
 
     <section class="center">
-      <h1>And now, what?<h1>
+      <h2>And now, what?<h2>
     </section>
 
     <section class="source">
@@ -533,41 +558,219 @@ function useStorage() {
 
     <section class="source">
       <pre><code class="language-jsx">
-      ...TODO
+const defaultStorage = new Map();
+
+function useStorage() {
+  const storage = React.useContext(StorageContext);
+
+  if (process.env.NODE_ENV === "test") {
+    return defaultStorage;
+  }
+
+  if (!storage) {
+    throw new Error("Cannot use useStorage outside of an StorageProvider");
+  }
+
+  return storage;
+}
       </code></pre>
-    </section>
-
-    <section>
-      <h2>You can't have everything!</h2>
-      <ul>
-        <li>TODO</li>
-      </ul>
-    </section>
-
-    <section class="black">
-      <h1>Every abstraction has tradeoffs<h1>
-    </section>
-
-    <section class="center">
-      <h1>Real world examples<h1>
-      <h2>To couple or not to couple</h2>
     </section>
 
     <section class="source">
       <pre><code class="language-jsx">
-      ...TODO
+const defaultStorage = new Map();
+
+function useStorage({ skipCheck ) {
+  const storage = React.useContext(StorageContext);
+
+  if (!storage && !skipCheck) {
+    throw new Error("Cannot use useStorage outside of an StorageProvider");
+  }
+
+  return storage;
+}
+      </code></pre>
+    </section>
+
+    <section class="source">
+      <pre><code class="language-jsx">
+const StorageContext = React.createContext(new Map());
+
+function useStorage() {
+  return React.useContext(StorageContext);
+}
       </code></pre>
     </section>
 
     <section>
       <h2>You can't have everything!</h2>
       <ul>
-        <li>TODO</li>
+        <li>Improved safetiness implies extra constraints</li>
+        <li>Do not assume how errors should be handled</li>
+        <li>What do your users really need?</li>
+        <li>Do not reinvent the wheel (just use React context default value)</li>
       </ul>
     </section>
 
     <section class="black">
-      <h1>Every abstraction has tradeoffs<h1>
+      <h2>Every abstraction has tradeoffs<h2>
+    </section>
+
+    <section class="center">
+      <h2>Real world example<h2>
+      <h3>To couple or not to couple</h3>
+    </section>
+
+    <section class="source">
+      <pre><code class="language-jsx">
+const log = logger("errorMiddleware");
+
+function errorMiddleware(ctx, next) {
+  try {
+    await next();
+  } catch(e) {
+    log.error("Something went wrong", e.message);
+    log.debug(e.stack);
+    ctx.status = 500;
+  }
+}
+      </code></pre>
+    </section>
+
+    <section class="source">
+      <pre><code class="language-yaml">
+loggers:
+  base:
+    level: INFO
+    transports:
+      - console
+
+  errorMiddleware:
+    level: DEBUG
+      </code></pre>
+    </section>
+
+    <section class="center">
+      <h3>And then, came the lambda function</h3>
+    </section>
+
+    <section class="source">
+      <pre><code class="language-js">
+async function azureFn(request, context) {
+  cont log = logger("azureFun"); // NOPE
+
+  try {
+    // Stuff
+  } catch(e) {
+    log.error("Something went wrong", e.message);
+    log.debug(e.stack);
+    return {
+      status: 500,
+    };
+  }
+}
+      </code></pre>
+    </section>
+
+    <section class="source">
+      <pre><code class="language-js">
+async function azureFn(request, context) {
+  const log = logger({
+    level: process.env.LOG_LEVEL,
+    transports: [ azureLogTransport(context) ]
+  });
+
+  // ...
+      </code></pre>
+    </section>
+
+    <section class="source">
+      <pre><code class="language-yaml">
+loggers:
+  base:
+    level: INFO
+
+  errorMiddleware:
+    level: DEBUG
+      </code></pre>
+    </section>
+
+    <section class="source">
+      <pre><code class="language-js">
+const log = logger({
+  ...config.loggers.base,
+  ...config.loggers.errorMiddleware,
+  transports: [ consoleTransport() ],
+});
+      </code></pre>
+    </section>
+
+    <section class="source">
+      <pre><code class="language-yaml">
+loggers:
+  base: &base
+    level: INFO
+
+  errorMiddleware:
+    &lt;&lt;: *base
+    level: DEBUG
+      </code></pre>
+    </section>
+
+    <section class="source">
+      <pre><code class="language-js">
+const log = logger({
+  ...config.loggers.errorMiddleware,
+  transports: [ consoleTransport() ],
+});
+      </code></pre>
+    </section>
+
+    <section class="center">
+      <h3>But you've lost the option to configure the transport in the YAML?</h3>
+    </section>
+
+    <section class="center">
+      <h3>Have we really?</h3>
+    </section>
+
+    <section class="source">
+<pre><code class="language-js">
+const transportFactories = {
+  console: () =&gt; consoleTransport(),
+};
+
+function coupledLogger(key) {
+  const loggerConfig = {
+    ...config.loggers.base,
+    ...config.loggers[key],
+  };
+
+  const transports = loggerConfig.transports.map((t) =&gt; transportFactories[t]());
+
+  return logger({ ...loggerConfig, transports });
+}
+      </code></pre>
+    </section>
+
+    <section class="source">
+      <pre><code class="language-js">
+const log = coupledLogger("errorMiddleware");
+      </code></pre>
+    </section>
+
+    <section>
+      <h2>You can't have everything!</h2>
+      <ul>
+        <li>Foundations: explicitness and dependency injection</li>
+        <li>Build commodities using the foundations</li>
+        <li>Use plain code if you can</li>
+        <li>Maybe you can have everything, sometimes</li>
+      </ul>
+    </section>
+
+    <section class="black">
+      <h2>Every abstraction has tradeoffs<h2>
     </section>
 
     <section class="center">
@@ -577,32 +780,40 @@ function useStorage() {
     <section>
       <h2>You can't have everything!</h2>
       <ul>
-        <li>TODO</li>
-        <li>Red flags: `storage: "memory" vs `storage: memoryStorage` example 
+        <li>Do not start with the abstraction. Extract later</li>
+        <li>Think in terms of APIs and client code</li>
+        <li>Explicit is almost always better than implicit</li>
+        <li>Avoid boilerplate with extra layers</li>
+        <li>Beware of the red flags: <code>storage: "memory"</code> vs <code>storage: memoryStorage()</code>
+        <li>Listen to your tests</li>
       </ul>
     </section>
 
     <section class="quote">
-      ...famous bad abstraction quote
+      <blockquote>
+        Duplication is far cheaper than the wrong abstraction
+        <cite>Sandi Metz - RailsConf 2014
+      </blockquote>
     </section>
 
     <section class="black">
-      <h1>Every abstraction has tradeoffs<h1>
+      <h2>Every abstraction has tradeoffs<h2>
+      <h3>This is the last one (promise)</h3>
     </section>
 
     <section class="blue">
       <h1>Strike your balance</h1>
-      <h4>Use the right abstraction</h4>
+      <h3>Use the right abstraction</h3>
     </section>
 
     <section class="black">
-      <h1>Questions?</h1>
+      <h2>Questions?</h2>
     </section>
 
     <section class="blue">
       <h3>Shameless plug</h3>
-      <h1>We are always hiring</h1>
-      <h2><a href="mailto:rrhh@trabe.io">rrhh@trabe.io</a></h2>
+      <h2>We are always hiring</h2>
+      <h3><a href="mailto:rrhh@trabe.io">rrhh@trabe.io</a></h3>
     </section>
   </div>
 
