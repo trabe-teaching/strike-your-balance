@@ -139,6 +139,7 @@
       font-style: normal;
       font-size: 70%;
       color: #666;
+      margin-top: 2vh;
     }
 
     section.quote em {
@@ -239,7 +240,7 @@
       <h2>Motivation</h2>
       <ul>
         <li>IDHO (In David's humble opinion)</li>
-        <li>Rookie developers struggle with abstractions</li>
+        <li>Developers struggle with abstractions</li>
         <li>...so, back to the basics</li>
       </ul>
     </section>
@@ -512,7 +513,7 @@ function Counter() {
 
 
 &lt;StorageProvider storage={window.localStorage}&gt;
-  &lt;MyComponent /&gt;
+  &lt;Counter /&gt;
 &lt;/StorageProvider&gt;
 
       </code></pre>
@@ -523,7 +524,7 @@ function Counter() {
 test("It works", () => {
   render(
     &lt;StorageProvider storage={new Map()}&gt;
-      &lt;MyComponent /&gt;
+      &lt;Counter /&gt;
     &lt;/StorageProvider&gt;
   );
 });
@@ -533,7 +534,7 @@ test("It works", () => {
     <section class="source">
       <pre><code class="language-jsx">
 test("Does not work", () => {
-  render(&lt;MyComponent/&gt;);
+  render(&lt;Counter/&gt;);
 });
       </code></pre>
     </section>
@@ -578,9 +579,7 @@ function useStorage() {
 
     <section class="source">
       <pre><code class="language-jsx">
-const defaultStorage = new Map();
-
-function useStorage({ skipCheck ) {
+function useStorage({ skipCheck }) {
   const storage = React.useContext(StorageContext);
 
   if (!storage && !skipCheck) {
@@ -589,6 +588,15 @@ function useStorage({ skipCheck ) {
 
   return storage;
 }
+      </code></pre>
+    </section>
+
+    <section class="source">
+      <pre><code class="language-jsx">
+function useStoredState(key, initialValue) {
+  const storage = useStorage({ skipCheck: true });
+
+  // ...
       </code></pre>
     </section>
 
@@ -657,7 +665,7 @@ loggers:
     <section class="source">
       <pre><code class="language-js">
 async function azureFn(request, context) {
-  cont log = logger("azureFun"); // NOPE
+  const log = logger("azureFun"); // NOPE
 
   try {
     // Stuff
@@ -677,7 +685,7 @@ async function azureFn(request, context) {
 async function azureFn(request, context) {
   const log = logger({
     level: process.env.LOG_LEVEL,
-    transports: [ azureLogTransport(context) ]
+    transports: [ azureLogTransport(context) ],
   });
 
   // ...
@@ -792,8 +800,25 @@ const log = coupledLogger("errorMiddleware");
     <section class="quote">
       <blockquote>
         Duplication is far cheaper than the wrong abstraction
-        <cite>Sandi Metz - RailsConf 2014
+        <cite>Sandi Metz - RailsConf 2014</cite>
       </blockquote>
+    </section>
+
+    <section class="quote">
+      <blockquote>
+        The biggest risk of tool development is accidentally convincing yourself that 
+        incidental complexity your abstraction created is essential complexity of the
+        problem space.
+        <br/>
+        And then you think workarounds for the incidental complexity are features
+        you’re proud of.
+        <cite>Ryan Florence - Remix fame</cite>
+      </blockquote>
+    </section>
+
+    <section class="center">
+      <h2>Let's play a game!</h2>
+      <h3>We picture an scenario. You tell us the problems</h3>
     </section>
 
     <section class="black">
