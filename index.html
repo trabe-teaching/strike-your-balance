@@ -463,6 +463,15 @@ it("updates the user preference", () => {
       <h2>Every abstraction has tradeoffs<h2>
     </section>
 
+    <section>
+      <h2>Abstraction budget</h2>
+      <ul>
+        <li>Less boilerplate in your app code: more in your tests</li>
+        <li>Easier to work with: harder to debug</li>
+        <li>Easier to grasp: harder to really understand</li>
+      </ul>
+    </section>
+
     <section class="center">
       <h2>Real world example<h2>
       <h3>A very common React abstraction</h3>
@@ -518,7 +527,7 @@ function useStoredState(key, initialValue) {
     <section class="source">
       <pre><code class="language-jsx">
 function Counter() {
-  const [count, setCount] = useStoredState(0);
+  const [count, setCount] = useStoredState("count", 0);
   return &lt;button onClick={() => setCount(count + 1)}&gt;{count}&lt;/button&gt;
 }
 
