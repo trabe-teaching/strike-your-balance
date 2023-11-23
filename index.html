@@ -383,8 +383,8 @@ it("updates the user preference", () => {
     <section class="source">
       <pre><code class="language-js">
 function updateUserPreference({ key, value }) {
-  const repo = userRepo();    
-  // Do stuff and get an updated user
+  const repo = userRepo();
+  // Do stuff with the user
   repo.update(updatedUser);
 }
       </code></pre>
@@ -424,7 +424,7 @@ function defaultRepos() {
 };
 
 function updateUserPreference({ key, value, repos = defaultRepos() }) {
-  // Do stuff and get an updated user
+  // Do stuff with the user
   repos.userRepo.update(updatedUser);
 }
       </code></pre>
@@ -455,7 +455,7 @@ it("updates the user preference", () => {
       <ul>
         <li>Explicit: no magic, easy to grasp, easy to test</li>
         <li>Implicit: convenience, less boilerplate</li>
-        <li>Both: convenience, easy to test</li>
+        <li>Both: convenience, "easy to test", double abstraction OMG!</li>
       </ul>
     </section>
 
