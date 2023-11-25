@@ -346,7 +346,7 @@ close(file);
     <section class="source">
       <pre><code class="language-js">
 function updateUserPreference({ key, value, repos }) {
-  // Do stuff and get an updated user
+  // Do stuff with the user
   repos.userRepo.update(updatedUser);
 }
       </code></pre>
@@ -359,6 +359,11 @@ const repos = {
 };
 
 updateUserPreference({ key: "someKey", value: "someValue", repos });
+
+// updateUserPreference({ key: "someKey", value: "somevalue", repos: { userRepo: userRepoDb() })
+// updateUserPreference({ key: "someKey", value: "somevalue", repos: { userRepo: userRepoKS() })
+// updateUserPreference({ key: "someKey", value: "somevalue", repos: { userRepo: logProxy(userRepo()) })
+
       </code></pre>
     </section>
 
@@ -556,6 +561,9 @@ test("It works", () => {
 test("Does not work", () => {
   render(&lt;Counter/&gt;);
 });
+
+
+// Error: "Cannot use useStorage outside of an StorageProvider"
       </code></pre>
     </section>
 
@@ -579,13 +587,13 @@ function useStorage() {
 
     <section class="source">
       <pre><code class="language-jsx">
-const defaultStorage = new Map();
+const testStorage = new Map();
 
 function useStorage() {
   const storage = React.useContext(StorageContext);
 
-  if (process.env.NODE_ENV === "test") {
-    return defaultStorage;
+  if (!storage && process.env.NODE_ENV === "test") {
+    return testStorage;
   }
 
   if (!storage) {
