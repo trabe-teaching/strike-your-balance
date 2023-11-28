@@ -233,19 +233,10 @@
     <section>
       <h2>Context</h2>
       <ul>
-        <li>We are "old" and tired 👨🏻‍🦳👴🏻</li>
         <li>We develop front and back with JS (15+ years)</li>
-        <li>We have developed with many other stacks: RoR, JEE, .NET...</li>
+        <li>We have developed with many stacks: RoR, JEE, .NET</li>
         <li>We journied from metamagic to explicitness</li>
-        <li>We long for the right abstractions</li>
       </ul>
-    </section>
-
-    <section class="quote">
-      <blockquote>
-        I feel like 99% of being a software engineer is debugging random shit, 1% algorithms. As you gain experience you see more random shit, your random shit toolbox is ever expanding until you can figure out anything with time since it’s semi like something else in your toolbox.
-      <cite>Jessie Frazelle</cite>
-      </blockquote>
     </section>
 
     <section>
@@ -253,9 +244,9 @@
       <ul>
         <li>IDHO (In David's humble opinion)</li>
         <li>Developers struggle with abstractions</li>
-        <li>...so, back to the basics</li>
       </ul>
     </section>
+
 
     <section class="blue">
       <h1>Strike your balance</h1>
@@ -275,33 +266,16 @@
     </section>
 
     <section class="center">
-      <h2>Could have been "extraction"</h2>
-    </section>
-
-    <section class="center">
       <h2>An abstraction is defined<br/>by its APIs</h2>
       <h3>How do I use it. What do I get</h3>
     </section>
 
     <section class="center"> 
       <h2>Example</h2>
-      <h3>Read a file into a string<br/>three languages, three levels of abstraction</h3>
+      <h3>Read a file into a string, three languages, three levels of abstraction</h3>
     </section>
 
-    <section class="source">
-      <pre><code class="language-ruby">
-# ruby
-text = File.open("some.txt").read
-      </code></pre>
-    </section>
 
-    <section class="source">
-      <pre><code class="language-js">
-// js - node
-const buffer = await fs.readFile("some.txt");
-const text = buffer.toString();
-      </code></pre>
-    </section>
 
     <section class="source">
       <pre><code class="language-c">
@@ -320,12 +294,27 @@ close(file);
       </code></pre>
     </section>
 
+    <section class="source">
+      <pre><code class="language-js">
+// js - node
+const buffer = await fs.readFile("some.txt");
+const text = buffer.toString();
+      </code></pre>
+    </section>
+
+    <section class="source">
+      <pre><code class="language-ruby">
+# ruby
+text = File.open("some.txt").read
+      </code></pre>
+    </section>
+
     <section>
       <h2>You can't have everything!</h2>
       <ul>
         <li>Every option has pros and cons</li>
         <li>High level: easy to use, easy to understand</li>
-        <li>Low level: highly customizable, fares better with unexpected uses</li>
+        <li>Low level: highly customizable, fares better with custom use cases</li>
       </ul>
     </section>
 
@@ -347,6 +336,8 @@ close(file);
       <pre><code class="language-js">
 function updateUserPreference({ key, value, repos }) {
   // Do stuff with the user
+
+  // Save the updated user
   repos.userRepo.update(updatedUser);
 }
       </code></pre>
@@ -388,8 +379,10 @@ it("updates the user preference", () => {
     <section class="source">
       <pre><code class="language-js">
 function updateUserPreference({ key, value }) {
-  const repo = userRepo();
   // Do stuff with the user
+
+  // Save the updated user
+  const repo = userRepo();
   repo.update(updatedUser);
 }
       </code></pre>
@@ -430,6 +423,8 @@ function defaultRepos() {
 
 function updateUserPreference({ key, value, repos = defaultRepos() }) {
   // Do stuff with the user
+
+  // Save the updated user
   repos.userRepo.update(updatedUser);
 }
       </code></pre>
@@ -474,12 +469,33 @@ it("updates the user preference", () => {
         <li>Less boilerplate in your app code: more in your tests</li>
         <li>Easier to work with: harder to debug</li>
         <li>Easier to grasp: harder to really understand</li>
+        <ul>
+          <li>AOP</li>
+          <li>Metaprogramming</li>
+          <li>AST transformations</li>
+        </ul>
       </ul>
     </section>
 
     <section class="center">
       <h2>Real world example<h2>
       <h3>A very common React abstraction</h3>
+    </section>
+    <section class="source">
+      <pre><code class="language-jsx">
+const Context = React.createContext(0);
+
+function Component() {
+  const value = useContext(Context);
+  return &lt;span&gt;value is {value}&lt;/span&gt;;
+}
+
+&lt;Context.Provider value={5}&gt;
+  &lt;Component /&gt;
+&lt;/Context.Provider&gt;
+
+// Renders "value is 5"
+      </code></pre>
     </section>
 
     <section class="source">
@@ -490,7 +506,7 @@ function StorageProvider({ storage, children }) {
   return (
     &lt;StorageContext.Provider value={storage}&gt;
       {children}
-    &lt;/StorageContext&gt;
+    &lt;/StorageContext.Provider&gt;
   );
 }
       </code></pre>
@@ -642,9 +658,9 @@ function useStorage() {
       <h2>You can't have everything!</h2>
       <ul>
         <li>Improved safetiness implies extra constraints</li>
-        <li>Do not assume how errors should be handled</li>
+        <li>Maybe avoid assuming how errors should be handled</li>
         <li>What do your users really need?</li>
-        <li>Do not reinvent the wheel (just use React context default value)</li>
+        <li>Try to not reinvent the wheel (i.e. just use React context default value)</li>
       </ul>
     </section>
 
@@ -801,7 +817,6 @@ const log = coupledLogger("errorMiddleware");
         <li>Foundations: explicitness and dependency injection</li>
         <li>Build commodities using the foundations</li>
         <li>Use plain code if you can</li>
-        <li>Maybe you can have everything, sometimes</li>
       </ul>
     </section>
 
@@ -817,18 +832,18 @@ const log = coupledLogger("errorMiddleware");
       <h2>You can't have everything!</h2>
       <ul>
         <li>Do not start with the abstraction. Extract later</li>
-        <li>Think in terms of APIs and client code</li>
+        <li>Think in terms of APIs and client code (and target users 😅)</li>
         <li>Explicit is almost always better than implicit</li>
         <li>Avoid boilerplate with extra layers</li>
         <li>Beware of the red flags: <code>storage: "memory"</code> vs <code>storage: memoryStorage()</code>
-        <li>Listen to your tests</li>
+        <li>Listen to your tests and docs</li>
       </ul>
     </section>
 
     <section class="quote">
       <blockquote>
         Duplication is far cheaper than the wrong abstraction
-        <cite>Sandi Metz - RailsConf 2014</cite>
+        <cite>Sandi Metz</cite>
       </blockquote>
     </section>
 
@@ -844,14 +859,9 @@ const log = coupledLogger("errorMiddleware");
       </blockquote>
     </section>
 
-    <section class="center">
-      <h2>Let's play a game!</h2>
-      <h3>We picture an scenario. You tell us the problems</h3>
-    </section>
-
     <section class="black">
       <h2>Every abstraction has tradeoffs<h2>
-      <h3>This is the last one (promise)</h3>
+      <h3>This is the last time!</h3>
     </section>
 
     <section class="blue">
@@ -864,9 +874,9 @@ const log = coupledLogger("errorMiddleware");
     </section>
 
     <section class="blue">
-      <h3>Shameless plug</h3>
-      <h2>We are always hiring</h2>
+      <h2>Shameless plug</h2>
       <h3><a href="mailto:rrhh@trabe.io">rrhh@trabe.io</a></h3>
+      <h3><a href="https://twitter.com/trabe">@trabe</a></h3>
     </section>
   </div>
 
