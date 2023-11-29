@@ -486,7 +486,7 @@ it("updates the user preference", () => {
 const Context = React.createContext(0);
 
 function Component() {
-  const value = useContext(Context);
+  const value = React.useContext(Context);
   return &lt;span&gt;value is {value}&lt;/span&gt;;
 }
 
